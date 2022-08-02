@@ -53,11 +53,12 @@ if __name__ == '__main__':
         successful or failed delivery of message
         """
         if err is not None:
-            print("Failed to deliver message: {}".format(err))
+            print(f"Failed to deliver message: {err}")
         else:
             delivered_records += 1
-            print("Produced record to topic {} partition [{}] @ offset {}"
-                  .format(msg.topic(), msg.partition(), msg.offset()))
+            print(
+                f"Produced record to topic {msg.topic()} partition [{msg.partition()}] @ offset {msg.offset()}"
+            )
 
     for n in range(10):
         record_key = "alice"

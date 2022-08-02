@@ -77,7 +77,7 @@ if __name__ == '__main__':
                 print("Waiting for message or event/error in poll()")
                 continue
             elif msg.error():
-                print('error: {}'.format(msg.error()))
+                print(f'error: {msg.error()}')
             else:
                 name_object = msg.key()
                 count_object = msg.value()
@@ -90,9 +90,7 @@ if __name__ == '__main__':
             break
         except SerializerError as e:
             # Report malformed record, discard results, continue polling
-            print("Message deserialization failed {}".format(e))
-            pass
-
+            print(f"Message deserialization failed {e}")
     # Leave group and commit final offsets
     consumer.close()
 

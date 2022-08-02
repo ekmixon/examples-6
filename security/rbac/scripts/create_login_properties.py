@@ -6,24 +6,20 @@
 import os;
 
 configfile = "../config/local-demo.env"
-fileHandler = open (configfile, "r")
+with open (configfile, "r") as fileHandler:
+  login_properties = "/tmp/login.properties"
+  if os.path.exists (login_properties):
+    os.remove(login_properties)
+  loginfile = open (login_properties, "w")
 
-login_properties = "/tmp/login.properties"
-if os.path.exists (login_properties):
-  os.remove(login_properties)
-loginfile = open (login_properties, "w")
- 
-# Get list of all lines in file
-listOfLines = fileHandler.readlines()
- 
-# Close file 
-fileHandler.close()
+  # Get list of all lines in file
+  listOfLines = fileHandler.readlines()
 
 for line in listOfLines:
-    if line.startswith("USER_"):
-      line = line[5:]
-      line = line.rstrip()
-      user,username = line.split("=", 1)
-      loginfile.write(username + ":" + username + "1\n")
+  if line.startswith("USER_"):
+    line = line[5:]
+    line = line.rstrip()
+    user,username = line.split("=", 1)
+    loginfile.write(f"{username}:{username}" + "1\n")
 
 loginfile.close()

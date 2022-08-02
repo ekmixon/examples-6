@@ -59,7 +59,7 @@ if __name__ == '__main__':
                 print("Waiting for message or event/error in poll()")
                 continue
             elif msg.error():
-                print('error: {}'.format(msg.error()))
+                print(f'error: {msg.error()}')
             else:
                 # Check for Kafka message
                 record_key = msg.key()

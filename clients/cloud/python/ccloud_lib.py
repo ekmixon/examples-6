@@ -128,9 +128,7 @@ def parse_args():
                           dest="topic",
                           help="topic name",
                           required=True)
-    args = parser.parse_args()
-
-    return args
+    return parser.parse_args()
 
 
 def read_ccloud_config(config_file):
@@ -177,10 +175,10 @@ def create_topic(conf, topic):
     for topic, f in fs.items():
         try:
             f.result()  # The result itself is None
-            print("Topic {} created".format(topic))
+            print(f"Topic {topic} created")
         except Exception as e:
             # Continue if error code TOPIC_ALREADY_EXISTS, which may be true
             # Otherwise fail fast
             if e.args[0].code() != KafkaError.TOPIC_ALREADY_EXISTS:
-                print("Failed to create topic {}: {}".format(topic, e))
+                print(f"Failed to create topic {topic}: {e}")
                 sys.exit(1)
